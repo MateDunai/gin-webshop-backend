@@ -16,9 +16,12 @@ def create_app():
     db.init_app(app) # setup database
     login_manager.init_app(app) #  setup login manager
 
+    from app.routes.auth import auth_bp
+    app.register_blueprint(auth_bp)
 
     from app.routes.products import products_bp
     app.register_blueprint(products_bp)
+
 
     return app
 
