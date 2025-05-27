@@ -1,29 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
+{% extends 'base.html' %}
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
+{% block title %}Login or Register{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-        {% for category, message in messages %}
+    {% for category, message in messages %}
         <p class="{% if category == 'error' %}text-error{% elif category == 'success' %}text-success{% else %}text-info{% endif %}">
-            {{ message }}
+        {{ message }}
         </p>
-        {% endfor %}
+    {% endfor %}
     {% endif %}
-    {% endwith %}
+{% endwith %}
 
-    <form method="POST">
-        <label>Username:</label>
-        <input type="text" name="username" required><br>
+<!-- Login Form -->
+<form method="POST" action="{{ url_for('auth.login') }}">
+    <label>Username:</label>
+    <input type="text" name="username" required><br>
 
-        <label>Password:</label>
-        <input type="password" name="password" required><br>
+    <label>Password:</label>
+    <input type="password" name="password" required><br>
 
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+    <button type="submit">Login</button>
+</form>
+
+<hr>
+
+<!-- Register Form -->
+<h2>Register</h2>
+<form method="POST" action="{{ url_for('auth.register') }}">
+    <label>Username:</label>
+    <input type="text" name="username" required><br>
+
+    <label>Password:</label>
+    <input type="password" name="password" required><br>
+
+    <button type="submit">Register</button>
+</form>
+
+{% endblock %}

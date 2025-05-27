@@ -1,12 +1,8 @@
 from flask import Flask
 from config import Config
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-from .models import db, User
+from app.extensions import db, login_manager
+from app.models import User, Product
 
-db = SQLAlchemy()
-
-login_manager = LoginManager()
 login_manager.login_view = 'auth.login' #  this sets the login redirect
 
 def create_app():
@@ -16,12 +12,14 @@ def create_app():
     db.init_app(app) # setup database
     login_manager.init_app(app) #  setup login manager
 
+    # Blueprint registration
+    from app.routes.main import main_bp
     from app.routes.auth import auth_bp
-    app.register_blueprint(auth_bp)
-
     from app.routes.products import products_bp
-    app.register_blueprint(products_bp)
 
+    app.register_blueprint(main_bp)
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(products_bp)
 
     return app
 
