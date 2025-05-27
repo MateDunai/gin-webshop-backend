@@ -41,3 +41,19 @@ Day 2 — Login system and authentication groundwork
 **Cleaned up and removed old/deprecated templates in preparation for future frontend work.
 
 **Added products blueprint skeleton with basic GET route to start product-related API endpoints.
+
+----------------------------------------------------
+Day 3 — Full CRUD functionality and database seeding
+----------------------------------------------------
+
+Implemented full CRUD operations for Product model (Create, Read, Update, Delete) in Flask routes.
+
+Created seed.py script to initialize and populate the database with sample products and a test user.
+
+Fixed User model initialization to match actual columns (renamed username → name).
+
+Tested database entries successfully using flask shell queries to confirm data persistence.
+
+Cleaned up and validated data insertion by deleting old entries before seeding fresh data.
+
+Learned proper app context management to run DB commands in standalone scripts.
