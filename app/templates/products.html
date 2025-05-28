@@ -8,10 +8,15 @@
     <div class="product-grid">
     {% for product in products %}
         <div class="product-card">
-        <img src="{{ product.image_url }}" alt="{{ product.name }}" width="150">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <strong>{{ product.price }} Ft</strong>
+            <img src="{{ product.image_url }}" alt="{{ product.name }}" width="150">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <strong>{{ product.price }} Ft</strong>
+
+            <form action="{{ url_for('cart.add_to_cart', product_id=product.id) }}" method="POST"> <!-- TODO CSRF protection -->
+                <input type="hidded" name="quantity" value="1">
+                <button type="submit">Add to Cart</button>
+            </form>
         </div>
     {% endfor %}
     </div>

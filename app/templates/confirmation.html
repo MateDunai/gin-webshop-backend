@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Confirmation - Gin Webshop{% endblock %}
+
+{% block content %}
+    <h1>Thank you for your order!</h1>
+    <p>Your gin is now on its way to your taste buds. 🍸</p>
+    <p>You’ll receive an email confirmation shortly with your order details.</p>
+    <a href="{{ url_for('main.index') }}">Back to homepage</a>
+{% endblock %}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Security -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Prevent indexing by search engines -->
+    <meta name="robots" content="noindex, nofollow">
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <title>{% block title %}Admin - Gin Webshop{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Gin Webshop Admin</h1>
+</header>
+
+<nav>
+    <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('admin.manage_products') }}">Manage Products</a>
+    <a href="{{ url_for('main.index') }}">Back to Shop</a>
+</nav>
+
+<main>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+</main>
+
+<footer>
+    &copy; {{ current_year or 2025 }} Gin Webshop Admin
+</footer>
+
+</body>
+</html>

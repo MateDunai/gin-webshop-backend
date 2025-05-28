@@ -1,0 +1,67 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>Total Orders</h3>
+        <p>{{ total_orders }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Revenue</h3>
+        <p>{{ total_revenue | round(2) }} Ft</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Products</h3>
+        <p>{{ total_products }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Users</h3>
+        <p>{{ total_users }}</p>
+    </div>
+</div>
+
+<hr>
+
+<h2>Recent Orders</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Email</th>
+            <th>Date</th>
+            <th>Total Price (Ft)</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in recent_orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.customer_name }}</td>
+            <td>{{ order.customer_email }}</td>
+            <td>{{ order.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>
+                {{
+                order.items | 
+                sum(attribute='unit_price' * attribute='quantity') | round(2)
+                }}
+            </td>
+            <td>{{ order.status }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
